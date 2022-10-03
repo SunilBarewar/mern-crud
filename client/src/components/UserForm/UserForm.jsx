@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
-
+import { useDispatch,useSelector } from 'react-redux'
+import { addUser } from '../../actions/action'
 const UserForm = () => {
 
     // const [data, setData] = useState({})
-
+    const dispatch = useDispatch()
     const [userDetails, setUserDetails] = useState({
         name: "",
         email: "",
         age: 18,
         gender: ""
     })
-    const handleAdd = (e) => {
+    const handleAdd = async(e) => {
         e.preventDefault()
-        axios.post('http://localhost:8050/user', userDetails)
-        .then(response => console.log(response))
-        .catch(error => console.log(error))
+        dispatch(addUser(userDetails))
     }
 
-    console.log(userDetails);
+    // console.log(userDetails);
     return (
         <Form>
             <h2>User Form</h2>

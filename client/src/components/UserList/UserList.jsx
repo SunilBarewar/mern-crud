@@ -3,29 +3,30 @@ import styled from 'styled-components'
 import User from '../User/User'
 import axios from 'axios'
 import io from 'socket.io-client'
-
+import { useDispatch, useSelector } from 'react-redux' 
+import { getUsers ,deleteUser} from '../../actions/action'
 const UserList = () => {
-
+  
   const socket = useRef()
-
-  const [users, setUsers] = useState([])
-
-  useEffect(() => {
-    axios.get('http://localhost:8050/user')
-      .then(response => setUsers(response.data))
-      .catch(error => console.log(error))
-  }, [])
-
-  useEffect(() => {
-    socket.current = io("http://localhost:8051")
-  }, [users])
-
+  const dispatch = useDispatch();
+  const [users, setUsers] = useState()
+  const usersData = useSelector((state) => state.Reducer.usersData)
+  const [id,setId] = useState(null)
+  
+  
+  useEffect(() =>{
+    dispatch(deleteUser(id))
+    setId(null)
+  },[id])
+  console.log("re--render" , usersData)
   return (
+    
     <Container>
       <h2>User List</h2>
       <Wrapper>
         {
-          users.map(user => <User user={user} />)
+          
+          usersData.map(user => <User user={user} setId = {setId} />)
         }
       </Wrapper>
     </Container>

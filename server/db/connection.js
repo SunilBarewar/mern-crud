@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-
-mongoose.connect(process.env.MONGO_URL, () => {
+const MONGO_URL = "mongodb+srv://anshul-atlas-admin:anshul-atlas-admin@cluster0.doczlt0.mongodb.net/myData?retryWrites=true&w=majority"
+mongoose.connect(MONGO_URL, () => {
     console.log("Connected to database");
 })
 

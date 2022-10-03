@@ -1,10 +1,21 @@
 import './App.css';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components'
 import UserForm from './components/UserForm/UserForm';
 import UserList from './components/UserList/UserList';
 import Header from './components/Header/Header';
-
+import {io} from 'socket.io-client'
+import { useDispatch, useSelector } from 'react-redux' 
+import { getUsers } from './actions/action'
 function App() {
+  // const socket = useRef()
+  // socket.current = io("http://localhost:8050")
+  
+  const dispatch = useDispatch();
+useEffect(() => {
+  dispatch(getUsers());
+},[])
+
   return (
     <Container>
       <Header />

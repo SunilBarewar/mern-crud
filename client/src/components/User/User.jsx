@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const User = ({ user }) => {
-    console.log(user)
+const User = ({ user,setId }) => {
+  
     return (
         <List id={user._id}>
             <Container>{user.name}</Container>
@@ -11,7 +11,7 @@ const User = ({ user }) => {
             <Container style={{width: "100px" , padding: "8px"}}>{user.gender}</Container>
             <Container >
                 <Edit>Edit</Edit>
-                <Delete>Delete</Delete>
+                <Delete onClick={() => setId(user._id)}>Delete</Delete>
             </Container>
         </List>
     )
